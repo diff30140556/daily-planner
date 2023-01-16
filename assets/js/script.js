@@ -29,11 +29,8 @@ $(function () {
       }
       console.log(textareaContent.val().trim());
       console.log(timeId)
-
       console.log(taskDataBase)
-      // taskObj.hour = timeId;
-      // taskObj.task = textareaContent.val().trim();
-      // taskDataBase.push(taskObj);
+
       
       // let nore = taskDataBase.filter(function(item,index,array) {
       //   if (item.hour.match(timeId)){
@@ -43,16 +40,31 @@ $(function () {
 
       //     return array.indexOf(item) === index;
       //   } else{
-      //     taskDataBase.push(taskObj);
-      //     console.log('Nomatch')
-      //   }
-      // })
-      for (let i = 0 ; i < taskDataBase.length ; i++){
-        let ele = timeId;
-        if (taskDataBase.indexOf(ele) == -1){
+        //     taskDataBase.push(taskObj);
+        //     console.log('Nomatch')
+        //   }
+        // })
+        if (taskDataBase.length === 0){
+          console.log('nodata')
+          taskObj.hour = timeId;
+          taskObj.task = textareaContent.val().trim();
           taskDataBase.push(taskObj);
-        }
-      }
+        }else{
+          console.log('hasdata')
+          taskDataBase.forEach(obj => {
+            console.log(obj)
+            if(obj.hour === timeId){
+              console.log('re')
+              obj.task = textareaContent.val().trim();
+              return;
+            }else{
+              console.log('new')
+              taskObj.hour = timeId;
+              taskObj.task = textareaContent.val().trim();
+              taskDataBase.push(taskObj);
+              }
+            })
+          }
 
       console.log(taskDataBase)
     }
