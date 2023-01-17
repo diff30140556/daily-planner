@@ -7,6 +7,18 @@ $(function () {
   let taskDataBase = JSON.parse(localStorage.getItem('taskData')) || [];
   // const saveBtnEl = $('.time-block');
   
+  let h = dayjs().format('H');
+  console.log(h)
+  console.log(timeBlockEl[2].children());
+  for( let i = 0; i < timeBlockEl.length; i++){
+    let timeBlockHour = parseInt(timeBlockEl[i].dataset.hour);
+    console.log(timeBlockHour)
+    console.log(typeof(timeBlockHour))
+    // if ( h - timeBlockHour === 0){
+    //   timeBlockEl[i].a
+    // }
+
+  }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -30,7 +42,7 @@ $(function () {
       console.log(textareaContent.val().trim());
       console.log(timeId)
       console.log(taskDataBase)
-
+    }
       
       // let nore = taskDataBase.filter(function(item,index,array) {
       //   if (item.hour.match(timeId)){
@@ -44,30 +56,24 @@ $(function () {
         //     console.log('Nomatch')
         //   }
         // })
-        if (taskDataBase.length === 0){
-          console.log('nodata')
-          taskObj.hour = timeId;
-          taskObj.task = textareaContent.val().trim();
-          taskDataBase.push(taskObj);
-        }else{
-          console.log('hasdata')
-          taskDataBase.forEach(obj => {
-            console.log(obj)
-            if(obj.hour === timeId){
-              console.log('re')
-              obj.task = textareaContent.val().trim();
-              return;
-            }else{
-              console.log('new')
-              taskObj.hour = timeId;
-              taskObj.task = textareaContent.val().trim();
-              taskDataBase.push(taskObj);
-              }
-            })
-          }
 
-      console.log(taskDataBase)
-    }
+        // taskObj.hour = timeId;
+        // taskObj.task = textareaContent.val().trim();
+        // if (taskDataBase.length === 0){
+        //   console.log('nodata')
+        //   taskDataBase.push(taskObj);
+        // }else{
+        //   console.log('hasdata')
+        //   for (let i=0;i<taskDataBase.length;i++){
+        //     if(taskDataBase[i].hour.includes(timeId)){
+        //       console.log('re')
+        //       taskDataBase[i].task = taskObj.task
+        //     }else{
+        //       console.log('no')
+        //       taskDataBase.push(taskObj)
+        //     }
+        //   }
+          // }
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
@@ -83,4 +89,3 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
     currentDataEl.text(dayjs().format('dddd, MMMM DD[th]'));
   });
-  
