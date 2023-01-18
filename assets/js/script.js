@@ -4,21 +4,37 @@
 $(function () {
   const currentDataEl = $('#currentDay');
   const timeBlockEl = $('.time-block');
-  let taskDataBase = JSON.parse(localStorage.getItem('taskData')) || [];
-  // const saveBtnEl = $('.time-block');
-  
-  let h = dayjs().format('H');
-  console.log(h)
-  console.log(timeBlockEl[2].children());
-  for( let i = 0; i < timeBlockEl.length; i++){
-    let timeBlockHour = parseInt(timeBlockEl[i].dataset.hour);
-    console.log(timeBlockHour)
-    console.log(typeof(timeBlockHour))
-    // if ( h - timeBlockHour === 0){
-    //   timeBlockEl[i].a
-    // }
+  const textareaEl = $('.time-block textarea');
+  const successEl = $('.successSaveMessage');
 
+  let taskDataBase = JSON.parse(localStorage.getItem('taskData')) || [];
+  console.log(taskDataBase);
+
+  function init() {
+    let currentHour = dayjs().format('H');
+
+    for( let i = 0; i < textareaEl.length; i++){
+      let timeBlockHour = parseInt(textareaEl.parent()[i].dataset.hour);
+
+      if ( currentHour - timeBlockHour === 0){
+        // timeBlockEl.find('.description')[i].addClass('present');
+        textareaEl[i].classList.add('present');
+      }else if ( currentHour - timeBlockHour > 0 ){
+        // timeBlockEl.find('.description')[i].addClass('past');
+        textareaEl[i].classList.add('past');
+      }else{
+        // timeBlockEl.find('.description')[i].addClass('future');
+        textareaEl[i].classList.add('future');
+      }
+    }
+
+    taskDataBase.filter(function(item) {
+      textareaEl.parent('#'+item.hour).find('textarea').val(item.task)
+      })
   }
+  
+  init();
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -30,19 +46,49 @@ $(function () {
   // console.log($(this).find('.btn'))
   function getTextareaContent() {
       let taskObj = {};
-      const textareaContent = $(this).siblings('textarea'); 
+      const textareaContent = $(this).siblings('textarea').val().trim(); 
       const timeId = $(this).parent().attr('id'); 
 
-      if (textareaContent.val().trim() === '') {
-        textareaContent.addClass('blank-alert')
-        return;
+      // if (textareaContent.val().trim() === '') {
+      //   textareaContent.addClass('blank-alert')
+      //   return;
+      // }else{
+      //   textareaContent.removeClass('blank-alert')
+      // }
+
+      taskObj.hour = timeId;
+      taskObj.task = textareaContent;
+      
+      if(taskDataBase.length === 0){
+        taskDataBase.push(taskObj);
       }else{
-        textareaContent.removeClass('blank-alert')
+        for (let i = 0 ; i < taskDataBase.length ; i++){
+          if (taskDataBase[i].hour === timeId){
+            console.log('repeat')
+            taskDataBase[i].task = textareaContent;
+            break;
+          }else if(i === taskDataBase.length-1){
+            console.log('new')
+            taskDataBase.push(taskObj);
+            break;
+          }
+        }
       }
-      console.log(textareaContent.val().trim());
-      console.log(timeId)
-      console.log(taskDataBase)
+
+      saveToLocal();
     }
+
+    function saveToLocal() {
+      localStorage.setItem('taskData',JSON.stringify(taskDataBase));
+      successSave();
+      init();
+    }
+
+    function successSave() {
+      successEl.html(`<p>congra</p>`);
+    }
+
+
       
       // let nore = taskDataBase.filter(function(item,index,array) {
       //   if (item.hour.match(timeId)){
@@ -52,10 +98,10 @@ $(function () {
 
       //     return array.indexOf(item) === index;
       //   } else{
-        //     taskDataBase.push(taskObj);
-        //     console.log('Nomatch')
-        //   }
-        // })
+      //       taskDataBase.push(taskObj);
+      //       console.log('Nomatch')
+      //     }
+      //   })
 
         // taskObj.hour = timeId;
         // taskObj.task = textareaContent.val().trim();
