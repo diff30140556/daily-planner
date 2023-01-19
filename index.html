@@ -20,13 +20,16 @@
   </head>
 
   <body>
+    <div class="taskList"></div>
     <header class="p-5 mb-4 text-center bg-secondary text-light">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
-      <p id="currentDay" class="lead"></p>
+      <p id="currentDay" class="lead text-warning"></p>
     </header>
     <div class="container-fluid p-5">
-      <div class="successSaveMessage"></div>
+      <div class="reset text-center mb-4">
+        <button type="button" class="btn btn-outline-danger reset-button">Clean All Tasks</button>
+      </div>
       <!-- Use class for "past", "present", and "future" to apply styles to the
         time-block divs accordingly. The javascript will need to do this by
         adding/removing these classes on each div by comparing the hour in the
