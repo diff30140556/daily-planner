@@ -1,77 +1,93 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-  }
-  
-  textarea {
-    background: transparent;
-    border: none;
-    resize: none;
-    color: #000000;
-    border-left: 1px solid black;
-    padding: 10px;
-  }
-  
-  .description {
-    white-space: pre-wrap;
-  }
-  .blank-alert{
-    outline: 1px solid #ff0000;
-  }
-  
-  .time-block {
-    border-radius: 15px;
-  }
-  
-  .row {
-    border-top: 1px solid white;
-  }
-  
-  .hour {
-    background-color: #ffffff;
-    color: #000000;
-    border-top: 1px dashed #000000;
-  }
-  
-  .past {
-    background-color: #d3d3d3;
-    color: rgb(255, 0, 0);
-  }
-  
-  .present {
-    background-color: #ff7b74;
-    color: rgb(0, 0, 255);
-  }
-  
-  .future {
-    background-color: #87e987;
-    color: rgb(0, 0, 0);
-  }
-  
-  .saveBtn {
-    border-left: 1px solid black;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: #06aed5;
-    color: white;
-  }
-  
-  .saveBtn i:hover {
-    font-size: 20px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .container-fluid{
-    position: relative;
-  }
+}
 
-  .container-fluid::after{
-    font-family: Arial, 'Font Awesome 5 Free';
-    color: #ff7b74;
-    font-weight: 500;
-    position: absolute;
-    content:'Appointment added to Local Storage \f058';
-    width: 100%;
-    top: 0;
-    text-align: center;
-  }
+textarea {
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #000000;
+  border-left: 1px solid black;
+  padding: 10px;
+}
+
+.description {
+  white-space: pre-wrap;
+}
+.blank-alert{
+  outline: 1px solid #ff0000;
+}
+
+.time-block {
+  border-radius: 15px;
+}
+
+.row {
+  border-top: 1px solid white;
+}
+
+.hour {
+  background-color: #ffffff;
+  color: #000000;
+  border-top: 1px dashed #000000;
+}
+
+.past {
+  background-color: #d3d3d3;
+  color: rgb(255, 0, 0);
+}
+
+.present {
+  background-color: #ff7b74;
+  color: rgb(0, 0, 255);
+}
+
+.future {
+  background-color: #87e987;
+  color: rgb(0, 0, 0);
+}
+
+.saveBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #06aed5;
+  color: white;
+}
+
+.saveBtn i:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.successSaveMessage{
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) ;
+  width: 100%;
+  text-align: center;
+}
+.successSaveMessage::after{
+  font-family: Arial, 'Font Awesome 5 Free';
+  color: #ff4e45;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 8px;
+  content:'Appointment added to Local Storage \00a0 \f058';
+  background: rgba(46, 44, 44, 0.8);
+  backdrop-filter: blur(3px);
+  animation-name: zoomIn;
+  animation-duration: 1.8s;
+  animation-fill-mode: forwards;
+  transform: scale(0);
+}
+
+@keyframes zoomIn{
+  0% {transform: scale(0);}
+  15% {transform: scale(1);}
+  85% {transform: scale(1);}
+  100% {transform: scale(0);}
+}
+

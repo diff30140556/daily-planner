@@ -5,7 +5,8 @@ $(function () {
   const currentDataEl = $('#currentDay');
   const timeBlockEl = $('.time-block');
   const textareaEl = $('.time-block textarea');
-  const successEl = $('.successSaveMessage');
+  const taskEl = $('.taskList');
+  const resetBtnEl = $('.reset-button');
 
   let taskDataBase = JSON.parse(localStorage.getItem('taskData')) || [];
   console.log(taskDataBase);
@@ -34,6 +35,7 @@ $(function () {
   }
   
   init();
+  setInterval(init, 2000);
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -80,46 +82,26 @@ $(function () {
 
     function saveToLocal() {
       localStorage.setItem('taskData',JSON.stringify(taskDataBase));
-      successSave();
+      if ( taskDataBase.length!==0 ){
+        successSave();
+      }
       init();
     }
-
+    
     function successSave() {
-      successEl.html(`<p>congra</p>`);
+      taskEl.removeClass('successSaveMessage');
+      setTimeout(function() {
+        taskEl.addClass('successSaveMessage');
+      }, 10);
     }
 
+    resetBtnEl.on('click', reset);
 
-      
-      // let nore = taskDataBase.filter(function(item,index,array) {
-      //   if (item.hour.match(timeId)){
-      //     console.log('match')
-      //     item.task = textareaContent.val().trim();
-      //     item.hour = timeId;
-
-      //     return array.indexOf(item) === index;
-      //   } else{
-      //       taskDataBase.push(taskObj);
-      //       console.log('Nomatch')
-      //     }
-      //   })
-
-        // taskObj.hour = timeId;
-        // taskObj.task = textareaContent.val().trim();
-        // if (taskDataBase.length === 0){
-        //   console.log('nodata')
-        //   taskDataBase.push(taskObj);
-        // }else{
-        //   console.log('hasdata')
-        //   for (let i=0;i<taskDataBase.length;i++){
-        //     if(taskDataBase[i].hour.includes(timeId)){
-        //       console.log('re')
-        //       taskDataBase[i].task = taskObj.task
-        //     }else{
-        //       console.log('no')
-        //       taskDataBase.push(taskObj)
-        //     }
-        //   }
-          // }
+    function reset() {
+      textareaEl.val('');
+      taskDataBase = [];
+      saveToLocal();
+    }
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
