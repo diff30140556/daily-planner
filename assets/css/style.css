@@ -1,8 +1,9 @@
+/* basic styling setting */
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
-
+/* textarea setting */
 textarea {
   background: transparent;
   border: none;
@@ -11,43 +12,43 @@ textarea {
   border-left: 1px solid black;
   padding: 10px;
 }
-
 .description {
   white-space: pre-wrap;
 }
-.blank-alert{
-  outline: 1px solid #ff0000;
-}
 
+/* task element */
 .time-block {
   border-radius: 15px;
 }
-
 .row {
   border-top: 1px solid white;
 }
-
+/* hour section */
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
 }
 
+/* styling of the past section */
 .past {
   background-color: #d3d3d3;
   color: rgb(255, 0, 0);
 }
 
+/* styling of the present section */
 .present {
   background-color: #ff7b74;
   color: rgb(0, 0, 255);
 }
 
+/* styling of the future section */
 .future {
   background-color: #87e987;
   color: rgb(0, 0, 0);
 }
 
+/* save button's styling */
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -55,12 +56,13 @@ textarea {
   background-color: #06aed5;
   color: white;
 }
-
+/* save button's hover effect */
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
 
+/* successfully save message's setting */
 .successSaveMessage{
   position: fixed;
   top: 20px;
@@ -83,7 +85,7 @@ textarea {
   animation-fill-mode: forwards;
   transform: scale(0);
 }
-
+/* zoom in animation */
 @keyframes zoomIn{
   0% {transform: scale(0);}
   15% {transform: scale(1);}
